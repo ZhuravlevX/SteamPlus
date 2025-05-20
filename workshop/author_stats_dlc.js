@@ -68,7 +68,7 @@
   
       // 7. Сформировать новый <tr> для "отрицательные оценки"
       const negRow = document.createElement('tr');
-      negRow.innerHTML = `<td><span style="color: #EE563B;">${negVotes}</span></td>
+      negRow.innerHTML = `<td><span style="color: #A34C25;">${negVotes}</span></td>
         <td>отрицательные оценки<span class="sub">(Доступно только вам)</span></td>`;
   
       // 8. Добавить новые <tr> в конец таблицы
