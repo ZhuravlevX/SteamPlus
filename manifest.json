@@ -20,8 +20,6 @@
         "collection/count_mod_size.js",
         "extensions/delete_sih_banners.js",
         "profile/comments_rep_coloring.js",
-        "profile/total_time_game.js",
-        "trade/badge_price_card.js",
         "workshop/social_workshop_icon.js",
         "workshop/author_stats_dlc.js",
         "workshop/author_replace_badge.js",
