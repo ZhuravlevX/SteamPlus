@@ -4,6 +4,17 @@
   }
 
   try {
+    const html = document.documentElement;
+    const isRu =
+        html &&
+        html.tagName === "HTML" &&
+        html.classList.contains("responsive") &&
+        html.classList.contains("DesktopUI") &&
+        html.getAttribute("lang") === "ru";
+
+    const labelCollectionSize = isRu ? "Размер коллекции" : "Collection size";
+    const labelCounting = isRu ? "Считаем..." : "Counting...";
+
     const holders = document.querySelectorAll('.rightSectionHolder');
     if (holders.length === 0) {
       return;
@@ -16,11 +27,11 @@
     }
 
     let already = Array.from(leftCol.querySelectorAll('.detailsStatLeft'))
-        .some(div => div.textContent.trim().toLowerCase().includes('размер коллекц'));
+        .some(div => div.textContent.trim().toLowerCase().includes(isRu ? 'размер коллекц' : 'collection size'));
     if (!already) {
       const leftDiv = document.createElement('div');
       leftDiv.className = 'detailsStatLeft';
-      leftDiv.textContent = 'Размер коллекции';
+      leftDiv.textContent = labelCollectionSize;
       leftCol.appendChild(leftDiv);
     }
 
@@ -29,7 +40,7 @@
     if (!rightDiv) {
       rightDiv = document.createElement('div');
       rightDiv.className = 'detailsStatRight';
-      rightDiv.textContent = 'Считаем...';
+      rightDiv.textContent = labelCounting;
       rightCol.appendChild(rightDiv);
     }
 
@@ -92,7 +103,7 @@
         errorCount++;
       }
       processed++;
-      rightDiv.textContent = `Считаем... ${processed} / ${modLinks.length}`;
+      rightDiv.textContent = `${labelCounting} ${processed} / ${modLinks.length}`;
     }
 
     if (totalSize * 1024 < 1) {

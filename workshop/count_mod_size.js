@@ -3,6 +3,16 @@
     await new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve));
   }
 
+  const html = document.documentElement;
+  const isRu =
+      html &&
+      html.tagName === "HTML" &&
+      html.classList.contains("responsive") &&
+      html.classList.contains("DesktopUI") &&
+      html.getAttribute("lang") === "ru";
+
+  const fileSizeLabel = isRu ? 'Размер файла: ' : 'File size: ';
+
   const modItems = document.querySelectorAll('.collectionItem');
   for (const item of modItems) {
     const link = item.querySelector('.collectionItemDetails a');
@@ -18,7 +28,7 @@
     fileSizeDiv.style.marginTop = '2px';
 
     const sizeLabel = document.createElement('span');
-    sizeLabel.textContent = 'Размер файла: ';
+    sizeLabel.textContent = fileSizeLabel;
     const sizeValue = document.createElement('span');
     sizeValue.textContent = '...';
     fileSizeDiv.appendChild(sizeLabel);

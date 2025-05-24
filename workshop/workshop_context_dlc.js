@@ -19,6 +19,19 @@
         return null;
     }
 
+    function getLang() {
+        const html = document.documentElement;
+        if (
+            html &&
+            html.tagName === "HTML" &&
+            html.classList.contains("responsive") &&
+            html.classList.contains("DesktopUI")
+        ) {
+            return html.getAttribute("lang");
+        }
+        return null;
+    }
+
     function patchTooltip3() {
         const navContent = document.querySelector('div.navContent#tooltip-3');
         if (!navContent) return;
@@ -26,16 +39,22 @@
         const userId = getUserId();
         const appid = getAppId(navContent);
         if (!userId || !appid) return;
+
+        const lang = getLang();
+        const isRu = lang === "ru";
+        const addonsText = isRu ? "Ваши аддоны" : "Your addons";
+        const collectionsText = isRu ? "Ваши коллекции" : "Your collections";
+
         const hr = document.createElement('hr');
         const addonsLink = document.createElement('a');
         addonsLink.href = `https://steamcommunity.com/id/${userId}/myworkshopfiles/?appid=${appid}`;
-        addonsLink.textContent = 'Ваши аддоны';
+        addonsLink.textContent = addonsText;
         addonsLink.setAttribute('data-added-myaddons-link', '1');
         addonsLink.style.display = 'block';
         addonsLink.style.margin = '8px 0';
         const collectionsLink = document.createElement('a');
         collectionsLink.href = `https://steamcommunity.com/id/${userId}/myworkshopfiles/?section=collections&appid=${appid}`;
-        collectionsLink.textContent = 'Ваши коллекции';
+        collectionsLink.textContent = collectionsText;
         collectionsLink.setAttribute('data-added-mycollections-link', '1');
         collectionsLink.style.display = 'block';
         collectionsLink.style.margin = '8px 0';
