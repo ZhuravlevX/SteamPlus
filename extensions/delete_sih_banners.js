@@ -5,6 +5,7 @@
         document.querySelectorAll('div.sih-features-button').forEach(el => el.remove());
         document.querySelectorAll('a#sih-header-notifications.sih-header-notifications').forEach(el => el.remove());
         document.querySelectorAll('a#sih-header-cart.sih-global-menu__icon').forEach(el => el.remove());
+        document.querySelectorAll('a.sih-subscribe-donat.sih-global').forEach(el => el.remove());
     }
     removeSponsorPanels();
     const observer = new MutationObserver(removeSponsorPanels);

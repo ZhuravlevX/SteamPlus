@@ -22,10 +22,8 @@
         });
     }
 
-    // Первый запуск
     replaceAllSocialIcons();
 
-    // Следим за изменениями DOM (например, подгрузка новых сообщений)
     const observer = new MutationObserver(replaceAllSocialIcons);
     observer.observe(document.body, { childList: true, subtree: true });
 })();
