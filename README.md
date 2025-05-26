@@ -4,9 +4,10 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/ZhuravlevX/YandexRaspTelegram/releases"><img src="https://img.shields.io/github/v/release/ZhuravlevX/SteamPlus?color=green&amp;logo=github" /></a>
+    <a href="https://github.com/ZhuravlevX/SteamPlus/releases"><img src="https://img.shields.io/github/v/release/ZhuravlevX/SteamPlus?color=green&amp;logo=github" /></a>
     <a href="https://github.com/ZhuravlevX"><img src="https://badgen.net/badge/github/zhuravlevx/purple?icon&label" /></a>
-    <a href="https://github.com/ZhuravlevX/YandexRaspTelegram/issues"><img src="https://img.shields.io/github/issues/ZhuravlevX/SteamPlus?color=orange&amp;logo=github"/></a>
+<a href="https://github.com/ZhuravlevX"><img src="https://badgen.net/badge/firefox/download/purple?icon&label" /></a>
+    <a href="https://github.com/ZhuravlevX/SteamPlus/issues"><img src="https://img.shields.io/github/issues/ZhuravlevX/SteamPlus?color=orange&amp;logo=github"/></a>
     <a href="LICENSE.md"><img src="https://badgen.net/static/license/MIT/purple"/></a>
 </p>
 
@@ -28,5 +29,11 @@
 
 ### Как установить данное расширение?
 
-Для начало вам необходимо **[установить последнюю версию](https://github.com/ZhuravlevX/SteamPlus/releases) данного расширения.** После чего вам необходимо в **Chrome перейти на старицу** `chrome://extensions/` и **перетащить** `.crx` **файл курсором мышки.**
+## Chrome, Yandex Browser
+1. [Установите последнюю версию](https://github.com/ZhuravlevX/SteamPlus/releases) файл `.crx` или `.zip`
+2. Перейдите на страницу `chrome://extensions/`;
+3. Перетащите `.crx` файл или `.zip` на данную страницу.
 
+## Firefox
+1. Установите [Firefox](https://www.mozilla.org/ru/firefox/new/) до последней версии;
+2. Перейдите в [Firefox Browser Addons](https://addons.mozilla.org) и введите в поиск "Steam+" либо [установите его по ссылке.](https://addons.mozilla.org/ru/firefox/addon/steamplus/)
