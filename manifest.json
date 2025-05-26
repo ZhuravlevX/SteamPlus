@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Steam+",
   "version": "1.0.0",
-  "description": "Расширение, дополняющий страницу Steam, добавляя новые функции и фичи, улучшая его работу.",
+  "description": "Расширение, дополняющий страницу Steam, добавляя новые функции, улучшая его работу.",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -14,12 +14,14 @@
     {
       "matches": [
         "https://steamcommunity.com/*",
+        "https://help.steampowered.com/*",
         "https://store.steampowered.com/*"
       ],
       "js": [
         "extensions/delete_sih_banners.js",
         "extensions/translation_of_cost_sih_statistics.js",
         "profile/comments_rep_coloring.js",
+        "profile/delete_badge_description.js",
         "workshop/count_collection_size.js",
         "workshop/count_mod_size.js",
         "workshop/social_workshop_icon.js",
