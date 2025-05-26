@@ -1,4 +1,4 @@
-(function replaceSocialIcons() {
+(function() {
     const youtubePath = "M941.3,294.9c-10.3-38.8-40.7-69.4-79.2-79.7-69.9-18.8-350.1-18.8-350.1-18.8,0,0-280.2,0-350.1,18.8-38.6,10.4-68.9,40.9-79.2,79.7-18.7,70.3-18.7,217.1-18.7,217.1,0,0,0,146.7,18.7,217.1,10.3,38.8,40.7,69.4,79.2,79.7,69.9,18.8,350.1,18.8,350.1,18.8,0,0,280.2,0,350.1-18.8,38.6-10.4,68.9-40.9,79.2-79.7,18.7-70.3,18.7-217.1,18.7-217.1,0,0,0-146.7-18.7-217.1ZM420.4,645.2v-266.4l234.2,133.2-234.2,133.2Z";
     const twitterPath = "M595.2,443.5L920.9,65h-77.2l-282.8,328.7L335.1,65H74.6l341.5,497L74.6,959h77.2l298.6-347.1,238.5,347.1h260.5l-354.2-515.5h0ZM489.5,566.4l-34.6-49.5L179.6,123.1h118.5l222.2,317.8,34.6,49.5,288.8,413.1h-118.5l-235.7-337.1h0Z";
     const facebookPath = "M512,66c-246.3,0-446,199.7-446,446s144,384.7,338.3,432.9v-296.6h-92v-136.3h92v-58.7c0-151.8,68.7-222.2,217.7-222.2s77,5.5,97,11.1v123.5c-10.5-1.1-28.8-1.7-51.5-1.7-73.1,0-101.4,27.7-101.4,99.7v48.2h145.7l-25,136.3h-120.7v306.4c220.8-26.7,392-214.7,392-442.7S758.3,66,512,66Z";
@@ -23,7 +23,7 @@
     const shareOnTwitter = isRu ? "Поделиться в Твиттере" : "Share on Twitter";
     const polycountTitle = isRu ? "Страница на Polycount" : "On Polycount";
 
-    function createSVGIcon(svgPath, viewBox = "0 0 1024 1024", width = 20, height = 20, color) {
+    function createSVGIcon(svgPath, viewBox, width, height, color) {
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('viewBox', viewBox);
         svg.setAttribute('width', width);
@@ -77,114 +77,78 @@
         img.parentNode.replaceChild(svg, img);
     });
 
-    (function removePolycount() {
-        const polycountImgSelector = 'img.toolsIcon[src="https://community.cloudflare.steamstatic.com/public/images//social/polycount.png"]';
-        document.querySelectorAll(polycountImgSelector).forEach(img => img.remove());
-        document.querySelectorAll('div.box').forEach(box => {
-            const titleEl = box.querySelector('.title');
-            if (titleEl && titleEl.textContent.trim() === polycountTitle) {
-                box.remove();
+    document.querySelectorAll('img.toolsIcon[src="https://community.cloudflare.steamstatic.com/public/images//social/polycount.png"]').forEach(img => img.remove());
+    document.querySelectorAll('div.box').forEach(box => {
+        const titleEl = box.querySelector('.title');
+        if (titleEl && titleEl.textContent.trim() === polycountTitle) {
+            box.remove();
+        }
+    });
+
+    var form = document.getElementById("KVTagsUpdateForm");
+    if (form) {
+        form.querySelectorAll(".box").forEach(box => {
+            let title = box.querySelector(".title");
+            let desc = box.querySelector(".description");
+            if (title && title.textContent.includes(twitterWord)) {
+                title.textContent = title.textContent.replace(new RegExp(twitterWord, "g"), "X");
+            }
+            if (desc && desc.textContent.includes(twitterWord)) {
+                desc.textContent = desc.textContent.replace(new RegExp(twitterWord, "g"), "X");
             }
         });
-    })();
-
-    (function replaceTwitterWordEverywhere() {
-        var form = document.getElementById("KVTagsUpdateForm");
-        if (form) {
-            form.querySelectorAll(".box").forEach(box => {
-                let title = box.querySelector(".title");
-                let desc = box.querySelector(".description");
-                if (title && title.textContent.includes(twitterWord)) {
-                    title.textContent = title.textContent.replace(new RegExp(twitterWord, "g"), "X");
+    }
+    document.querySelectorAll('a.general_btn.panel_btn').forEach(btn => {
+        btn.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                if (node.textContent.includes(twitterWord)) {
+                    node.textContent = node.textContent.replace(new RegExp(twitterWord, "g"), "X");
                 }
-                if (desc && desc.textContent.includes(twitterWord)) {
-                    desc.textContent = desc.textContent.replace(new RegExp(twitterWord, "g"), "X");
-                }
-            });
-        }
-        document.querySelectorAll('a.general_btn.panel_btn').forEach(btn => {
-            btn.childNodes.forEach(node => {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    if (node.textContent.includes(twitterWord)) {
-                        node.textContent = node.textContent.replace(new RegExp(twitterWord, "g"), "X");
-                    }
-                    node.textContent = node.textContent.replace(/([^ ])(Страница)/g, '$1 Страница');
-                }
-            });
+                node.textContent = node.textContent.replace(/([^ ])(Страница)/g, '$1 Страница');
+            }
         });
-    })();
+    });
 
-    (function replaceSharePopupTwitter() {
-        function createSVGIcon(svgPath, viewBox = "0 0 1024 1024", width = 32, height = 32, color) {
-            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.setAttribute('viewBox', viewBox);
-            svg.setAttribute('width', width);
-            svg.setAttribute('height', height);
-            svg.style.verticalAlign = "middle";
-            svg.style.display = 'inline-block';
-            svg.style.fill = color || '#fff';
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', twitterPath);
-            svg.appendChild(path);
-            return svg;
+    const twBtn = document.getElementById("SharePopupLink_Twitter");
+    if (twBtn) {
+        if (twBtn.title && twBtn.title.includes(twitterWord)) {
+            twBtn.title = twBtn.title.replace(new RegExp(twitterWord, "g"), "X");
         }
-        const twBtn = document.getElementById("SharePopupLink_Twitter");
-        if (twBtn) {
-            if (twBtn.title && twBtn.title.includes(twitterWord)) {
-                twBtn.title = twBtn.title.replace(new RegExp(twitterWord, "g"), "X");
-            }
-            const span = twBtn.querySelector("span");
-            if (span) {
-                span.childNodes.forEach(node => {
-                    if (node.nodeType === Node.TEXT_NODE && node.textContent.includes(twitterWord)) {
-                        node.textContent = node.textContent.replace(new RegExp(twitterWord, "g"), "X");
-                    }
-                });
-                const img = span.querySelector('img[src*="twitter_large.png"]');
-                if (img) {
-                    const svg = createSVGIcon(twitterPath, "0 0 1024 1024", 32, 32, "#fff");
-                    svg.className = img.className;
-                    if (img.style.width) svg.style.width = img.style.width;
-                    if (img.style.height) svg.style.height = img.style.height;
-                    img.parentNode.replaceChild(svg, img);
-                }
-            }
-            twBtn.childNodes.forEach(node => {
-                // "Поделиться в Твиттере" or "Share on Twitter" → shareOnX
-                if (node.nodeType === Node.TEXT_NODE && node.textContent.includes(shareOnTwitter)) {
-                    node.textContent = node.textContent.replace(shareOnTwitter, shareOnX);
+        const span = twBtn.querySelector("span");
+        if (span) {
+            span.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.includes(twitterWord)) {
+                    node.textContent = node.textContent.replace(new RegExp(twitterWord, "g"), "X");
                 }
             });
-        }
-    })();
-
-    (function replaceSharePopupFacebook() {
-        function createSVGIcon(svgPath, viewBox = "0 0 1024 1024", width = 32, height = 32, color) {
-            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.setAttribute('viewBox', viewBox);
-            svg.setAttribute('width', width);
-            svg.setAttribute('height', height);
-            svg.style.verticalAlign = "middle";
-            svg.style.display = 'inline-block';
-            svg.style.fill = color || '#fff';
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', facebookPath);
-            svg.appendChild(path);
-            return svg;
-        }
-        const fbBtn = document.getElementById("SharePopupLink_Facebook");
-        if (fbBtn) {
-            const span = fbBtn.querySelector("span");
-            if (span) {
-                const img = span.querySelector('img[src*="facebook_large.png"]');
-                if (img) {
-                    const svg = createSVGIcon(facebookPath, "0 0 1024 1024", 32, 32, "#fff");
-                    svg.className = img.className;
-                    if (img.style.width) svg.style.width = img.style.width;
-                    if (img.style.height) svg.style.height = img.style.height;
-                    img.parentNode.replaceChild(svg, img);
-                }
+            const img = span.querySelector('img[src*="twitter_large.png"]');
+            if (img) {
+                const svg = createSVGIcon(twitterPath, "0 0 1024 1024", 32, 32, "#fff");
+                svg.className = img.className;
+                if (img.style.width) svg.style.width = img.style.width;
+                if (img.style.height) svg.style.height = img.style.height;
+                img.parentNode.replaceChild(svg, img);
             }
         }
-    })();
+        twBtn.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.includes(shareOnTwitter)) {
+                node.textContent = node.textContent.replace(shareOnTwitter, shareOnX);
+            }
+        });
+    }
+
+    const fbBtn = document.getElementById("SharePopupLink_Facebook");
+    if (fbBtn) {
+        const span = fbBtn.querySelector("span");
+        if (span) {
+            const img = span.querySelector('img[src*="facebook_large.png"]');
+            if (img) {
+                const svg = createSVGIcon(facebookPath, "0 0 1024 1024", 32, 32, "#fff");
+                svg.className = img.className;
+                if (img.style.width) svg.style.width = img.style.width;
+                if (img.style.height) svg.style.height = img.style.height;
+                img.parentNode.replaceChild(svg, img);
+            }
+        }
+    }
 })();

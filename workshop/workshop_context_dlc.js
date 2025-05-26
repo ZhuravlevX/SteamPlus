@@ -1,4 +1,4 @@
-(function observeAndPatchNavContent3Collections() {
+(function() {
     function getUserId() {
         const link = document.querySelector('a[href*="steamcommunity.com/id/"], a[href*="steamcommunity.com/profiles/"]');
         if (link) {
@@ -21,14 +21,8 @@
 
     function getLang() {
         const html = document.documentElement;
-        if (
-            html &&
-            html.tagName === "HTML" &&
-            html.classList.contains("responsive") &&
-            html.classList.contains("DesktopUI")
-        ) {
+        if (html && html.classList.contains("responsive") && html.classList.contains("DesktopUI"))
             return html.getAttribute("lang");
-        }
         return null;
     }
 
@@ -39,12 +33,9 @@
         const userId = getUserId();
         const appid = getAppId(navContent);
         if (!userId || !appid) return;
-
-        const lang = getLang();
-        const isRu = lang === "ru";
+        const isRu = getLang() === "ru";
         const addonsText = isRu ? "Ваши аддоны" : "Your addons";
         const collectionsText = isRu ? "Ваши коллекции" : "Your collections";
-
         const hr = document.createElement('hr');
         const addonsLink = document.createElement('a');
         addonsLink.href = `https://steamcommunity.com/id/${userId}/myworkshopfiles/?appid=${appid}`;
@@ -63,10 +54,6 @@
         navContent.appendChild(collectionsLink);
     }
 
-    const observer = new MutationObserver(() => {
-        patchTooltip3();
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(patchTooltip3).observe(document.body, { childList: true, subtree: true });
     patchTooltip3();
 })();

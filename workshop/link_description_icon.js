@@ -1,4 +1,4 @@
-(function replaceSocialBbLinkHostWithIconGrey() {
+(function() {
     const ICONS = {
         "[t.me]": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1em" height="1em" style="vertical-align:middle;"><path fill="rgba(150,150,150,1)" d="M512,66c-246.3,0-446,199.7-446,446s199.7,446,446,446,446-199.7,446-446S758.3,66,512,66ZM718.7,369.3c-6.7,70.5-35.8,241.7-50.5,320.7-6.3,33.4-18.6,44.6-30.5,45.7-25.9,2.4-45.6-17.1-70.7-33.6-39.3-25.7-61.4-41.7-99.5-66.9-44-29-15.5-45,9.6-71,6.6-6.8,120.7-110.6,122.9-120,.3-1.2.5-5.6-2.1-7.9-2.6-2.3-6.5-1.5-9.2-.9-3.9.9-66.6,42.3-188.1,124.3-17.8,12.2-33.9,18.2-48.4,17.9-15.9-.3-46.6-9-69.3-16.4-27.9-9.1-50.1-13.9-48.2-29.3,1-8,12.1-16.2,33.2-24.6,130-56.6,216.7-94,260.1-112,123.9-51.5,149.6-60.5,166.4-60.8,3.7,0,11.9.8,17.3,5.2,4.5,3.7,5.8,8.6,6.3,12.1.6,3.5,1.3,11.4.7,17.6Z"></path></svg>`,
         "[www.twitch.tv]": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1em" height="1em" style="vertical-align:middle;"><path fill="rgba(150,150,150,1)" d="M288.5,65l-159.6,159.6v574.7h191.6v159.6l159.6-159.6h127.7l287.4-287.4V65H288.5ZM831.3,480.1l-127.7,127.7h-127.7l-111.7,111.7v-111.7h-143.7V128.9h510.9v351.2Z"></path><rect x="671.6" y="240.6" width="63.9" height="191.6" fill="rgba(150,150,150,1)"></rect><rect x="496" y="240.6" width="63.9" height="191.6" fill="rgba(150,150,150,1)"></rect></svg>`,
@@ -17,14 +17,12 @@
             const txt = span.textContent.trim();
             if (ICONS[txt] && !span.dataset.socialIconReplaced) {
                 span.innerHTML = ICONS[txt];
-                span.title = txt.replace(/[\[\]]/g, ''); // убираем скобки для title
+                span.title = txt.replace(/[\[\]]/g, '');
                 span.dataset.socialIconReplaced = "1";
             }
         });
     }
 
     replaceAllSocialIcons();
-
-    const observer = new MutationObserver(replaceAllSocialIcons);
-    observer.observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(replaceAllSocialIcons).observe(document.body, { childList: true, subtree: true });
 })();
