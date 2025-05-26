@@ -5,7 +5,7 @@
 
 <p align="center">
     <a href="https://github.com/ZhuravlevX/SteamPlus/releases"><img src="https://img.shields.io/github/v/release/ZhuravlevX/SteamPlus?color=green&amp;logo=github" /></a>
-    <a href="https://github.com/ZhuravlevX"><img src="https://badgen.net/badge/github/zhuravlevx/purple?icon&label" /></a>
+    <a href="https://addons.mozilla.org/ru/firefox/addon/steamplus/"><img src="https://badgen.net/badge/github/zhuravlevx/purple?icon&label" /></a>
 <a href="https://github.com/ZhuravlevX"><img src="https://badgen.net/badge/firefox/download/purple?icon&label" /></a>
     <a href="https://github.com/ZhuravlevX/SteamPlus/issues"><img src="https://img.shields.io/github/issues/ZhuravlevX/SteamPlus?color=orange&amp;logo=github"/></a>
     <a href="LICENSE.md"><img src="https://badgen.net/static/license/MIT/purple"/></a>
